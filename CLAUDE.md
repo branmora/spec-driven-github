@@ -64,11 +64,11 @@ Hand-writing every substep over-specifies the how. Let the agent propose atomic 
 
 ## The Loop
 
-1. Write `specs/<epic>.md` using the template below.
+1. Write `specs/<number>-<name>.md` using the template below, such as `specs/001-user-authentication.md`.
 2. Ask the agent to break it into atomic sub-issues that respect the non-goals.
 3. Materialize the breakdown to GitHub in one pass.
 4. Work the issues in unblocked order.
-5. Record non-obvious choices in `DECISIONS.md`.
+5. Record non-obvious choices in `DECISIONS/<number>-<name>.md`, such as `DECISIONS/001-use-session-cookies.md`.
 
 ## Spec Template
 
@@ -91,24 +91,11 @@ The fence. Each line stops a sub-issue from forming.
 
 ## Materialize
 
-Native flags, on a `gh` that ships cli/cli#13057. Create the epic, then the tasks in dependency order so every reference already exists:
+Create the epic, then the tasks in dependency order so every reference already exists:
 
 ```
-gh issue create --title "Epic: <name>" --label epic --body-file specs/<epic>.md
+gh issue create --title "Epic: <name>" --label epic --body-file specs/<number>-<name>.md
 gh issue create --title "<task>" --parent <epic#> --blocked-by <prev#> --body-file .github/tasks/<id>.md
-```
-
-Detect native support once:
-
-```
-gh issue create --help | grep -qE -- "--parent" && echo native || echo fallback
-```
-
-On an older `gh`, create the issues plainly, then link them with the gh-issue-ext extension or `gh api` GraphQL (`addSubIssue`, `addBlockedBy`):
-
-```
-gh issue-ext sub add <epic#> <task#>
-gh issue-ext blocking add <blocked#> <blocker#>
 ```
 
 ## Blocking Discipline

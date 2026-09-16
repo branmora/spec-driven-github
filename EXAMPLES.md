@@ -4,7 +4,7 @@ This is the full version of the user-authentication epic from the README, with t
 
 ## 1. The spec
 
-`specs/auth.md`:
+`specs/001-user-authentication.md`:
 
 ```
 # User Authentication — Spec
@@ -32,7 +32,7 @@ Email-and-password signup, login, logout, and a session that persists across vis
 
 Ask the agent in plan mode:
 
-> Break specs/auth.md into atomic sub-issues. Respect the non-goals.
+> Break specs/001-user-authentication.md into atomic sub-issues. Respect the non-goals.
 
 Four tasks come back. The schema and hashing come first because signup and login both depend on it; logout depends on a session existing, so it follows login. Notice what the fence kept out: no reset task, no social-login task. Prune anything speculative before continuing.
 
@@ -41,7 +41,7 @@ Four tasks come back. The schema and hashing come first because signup and login
 Create the epic, then the tasks in dependency order so every reference already exists. No organization here, so the epic uses a label:
 
 ```
-gh issue create --title "Epic: User authentication" --label epic --body-file specs/auth.md   # -> #1
+gh issue create --title "Epic: User authentication" --label epic --body-file specs/001-user-authentication.md   # -> #1
 gh issue create --title "User schema and password hashing"  --parent 1               --body-file .github/tasks/auth-02.md  # -> #2
 gh issue create --title "Signup endpoint and form"          --parent 1 --blocked-by 2 --body-file .github/tasks/auth-03.md  # -> #3
 gh issue create --title "Login and session persistence"     --parent 1 --blocked-by 2 --body-file .github/tasks/auth-04.md  # -> #4

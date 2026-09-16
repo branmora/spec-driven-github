@@ -25,7 +25,7 @@ GitHub issues now express hierarchy and dependencies directly, all scriptable th
 
 ## What It Looks Like
 
-Take a feature: user accounts. Start with a one-page spec, `specs/auth.md`:
+Take a feature: user accounts. Start with a one-page spec, `specs/001-user-authentication.md`:
 
 ```
 # User Authentication — Spec
@@ -51,12 +51,12 @@ Email-and-password signup, login, logout, and a session that persists across vis
 
 Hand it to the agent with one request:
 
-> Break specs/auth.md into atomic sub-issues. Respect the non-goals.
+> Break specs/001-user-authentication.md into atomic sub-issues. Respect the non-goals.
 
 It proposes a breakdown. Prune it, then materialize the result to GitHub in one pass. The epic is created first, then each task with its parent and its blocker set at creation:
 
 ```
-gh issue create --title "Epic: User authentication" --label epic --body-file specs/auth.md   # -> #1
+gh issue create --title "Epic: User authentication" --label epic --body-file specs/001-user-authentication.md   # -> #1
 gh issue create --title "User schema and password hashing"  --parent 1               --body-file .github/tasks/auth-02.md  # -> #2
 gh issue create --title "Signup endpoint and form"          --parent 1 --blocked-by 2 --body-file .github/tasks/auth-03.md  # -> #3
 gh issue create --title "Login and session persistence"     --parent 1 --blocked-by 2 --body-file .github/tasks/auth-04.md  # -> #4
@@ -126,7 +126,7 @@ Hand-writing every substep wastes effort and over-specifies the how. The agent p
 - Derive sub-issues in plan mode, then review and cut before creating anything
 - Materialize in one pass, with parent and blocking edges set at creation
 - Start only issues with no open blockers, checking `blockedBy` first
-- Record non-obvious choices in `DECISIONS.md`, the amendment log for when a spec shifts mid-flight
+- Record non-obvious choices as numbered files in `DECISIONS/`, such as `DECISIONS/001-use-session-cookies.md`, when a spec shifts mid-flight
 
 **The test:** Did the model write the substeps and a person approve them? If someone hand-wrote the task list, the spec was doing the agent's job.
 
@@ -155,6 +155,6 @@ For Codex, Cursor, or Copilot, copy [AGENTS.md](AGENTS.md) alongside. It points 
 
 ## Requirements
 
-A `gh` that ships the Issues 2.0 work (cli/cli#13057) for native `--parent` and `--blocked-by`. Earlier versions use the extension fallback described in CLAUDE.md.
+A current `gh` with native `--parent` and `--blocked-by` support.
 
 Issue types need a GitHub organization. Without one, epics use a label, and everything else works the same.
