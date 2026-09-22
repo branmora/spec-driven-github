@@ -138,20 +138,21 @@ Heavier frameworks add phases, validators, and harnesses, and those pay off at l
 
 ## Install
 
-Drop the convention into a project:
+Copy the shared agent instructions into a project:
 
 ```
-curl -o CLAUDE.md https://raw.githubusercontent.com/<you>/spec-driven-github/main/CLAUDE.md
+curl -o AGENTS.md https://raw.githubusercontent.com/branmora/spec-driven-github/main/AGENTS.md
 ```
 
-Append it to an existing `CLAUDE.md`:
+If the project already has an `AGENTS.md`, add the convention there instead of replacing its existing instructions.
+
+[Claude Code 2.1.277 and later](https://code.claude.com/docs/en/changelog) can read `AGENTS.md` by default when the project has no `CLAUDE.md` or `CLAUDE.local.md`. If the project has either file, or a Claude Code session [cannot load `AGENTS.md` directly](https://code.claude.com/docs/en/memory#when-agentsmd-support-is-unavailable), add this import to `CLAUDE.md`:
 
 ```
-echo "" >> CLAUDE.md
-curl https://raw.githubusercontent.com/<you>/spec-driven-github/main/CLAUDE.md >> CLAUDE.md
+@AGENTS.md
 ```
 
-For Codex, Cursor, or Copilot, copy [AGENTS.md](AGENTS.md) alongside. It points at the same rules. Plugin packaging for `/plugin marketplace add` is on the roadmap.
+Plugin packaging for `/plugin marketplace add` is on the roadmap.
 
 ## Requirements
 
