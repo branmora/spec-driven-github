@@ -152,8 +152,6 @@ If the project already has an `AGENTS.md`, add the convention there instead of r
 @AGENTS.md
 ```
 
-Plugin packaging for `/plugin marketplace add` is on the roadmap.
-
 ## Requirements
 
 A current `gh` with native `--parent` and `--blocked-by` support.
